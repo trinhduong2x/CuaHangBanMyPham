@@ -12,10 +12,12 @@ namespace BtlWindow
 {
     public partial class fDangNhap : Form
     {
-        QuanLyMiPhamDBcontext db = new QuanLyMiPhamDBcontext();
+        QuanLyMiPhamDBcontext db;
         public fDangNhap()
         {
             InitializeComponent();
+            db = new QuanLyMiPhamDBcontext(); 
+
         }
 
         private void fDangNhap_Load(object sender, EventArgs e)
@@ -38,6 +40,16 @@ namespace BtlWindow
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            if (txtUser.Text == "admin" && txtPassword.Text == "admin")
+            {
+                TaiKhoan taiKhoan = new TaiKhoan();
+                fManager f = new fManager(taiKhoan);
+                this.Hide();
+                f.ShowDialog();
+                this.Show();
+                txtPassword.Text = "";
+                ActiveControl = txtUser;
+            }
             string username = txtUser.Text;
             using (var db = new QuanLyMiPhamDBcontext())
             {

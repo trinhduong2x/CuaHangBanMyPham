@@ -16,13 +16,23 @@ namespace BtlWindow
 {
     public partial class fTrangChu : Form
     {
-        QuanLyMiPhamDBcontext db = new QuanLyMiPhamDBcontext();
         private string sdt;
         private TaiKhoan t;
         private KhachHang k;
 
         //SanPhamTam list = new SanPhamTam();
         List<SanPhamTam> list = new List<SanPhamTam>();
+
+        private QuanLyMiPhamDBcontext db
+        {
+            get
+            {
+                if (!DesignMode)
+                    return new QuanLyMiPhamDBcontext();
+                return null;
+            }
+        }
+
 
         private bool KiemTraSL()
         {
